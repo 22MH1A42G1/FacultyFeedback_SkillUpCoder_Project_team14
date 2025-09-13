@@ -36,7 +36,7 @@ import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-public class team14FacultyFeedback {  
+public class FacultyFeedback {  
     public static void main(String[] args) throws Exception {
         Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/team14", "root", "Aditya@1710");
         Statement st = con.createStatement();
