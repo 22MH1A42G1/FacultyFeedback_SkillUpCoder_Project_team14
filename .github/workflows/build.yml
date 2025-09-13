@@ -20,11 +20,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build with Maven (with Shade plugin)
+      - name: Build with Maven
         run: mvn -B clean package shade:shade
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
-          name: FacultyFeedbackApp
-          path: target/*-shaded.jar
+          name: FacultyFeedback_SkillUpCoder_Project_team14
+          path: mysql-connector-j-8.1.0.jar
