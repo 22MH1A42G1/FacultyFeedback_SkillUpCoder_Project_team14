@@ -1,0 +1,49 @@
+name: Java Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:               # MySQL service container
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: Aditya@1710
+          MYSQL_DATABASE: team14
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Compile Java code
+      run: javac FacultyFeedback_SkillUpCoder_Project_team14/team14FacultyFeedback.java
+
+    - name: Package JAR
+      run: |
+        mkdir build
+        jar cfe build/team14FacultyFeedback.jar team14FacultyFeedback -C FacultyFeedback_SkillUpCoder_Project_team14 .
+
+    - name: Upload artifact (JAR file)
+      uses: actions/upload-artifact@v4
+      with:
+        name: FacultyFeedbackApp
+        path: build/team14FacultyFeedback.jar
